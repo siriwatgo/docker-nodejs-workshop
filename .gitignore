@@ -1,0 +1,8 @@
+node_modules/
+dist/
+logs/*.log
+pm2-prod.json
+pm2-alpha.json
+.vscode/
+docs/
+.idea/*

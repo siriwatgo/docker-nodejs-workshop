@@ -1,0 +1,40 @@
+version: "3.7"
+
+services:
+  api:
+    env_file:
+     - ./.env
+    build:
+      context: .
+      args: 
+        APP_PORT: ${NODEJS_PORT}
+        DEBUG_PORT: ${NODEJS_PORT_DEBUG}
+        # APP_DB: mongo
+    # command: npm run debug
+    container_name: "lemp_api_${API_CONTAINER_NAME_VERSION}"
+    restart: always
+    ports:
+      - "${NODEJS_PORT}:3000"
+      - "80:80"
+    environment:
+      NODE_ENV: ${NODE_ENV}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./logs/api:/usr/src/app/logs
+      # - ./api:/usr/src/app
+  # mongo:
+  #   env_file:
+  #     - ./.env
+  #   image: "mongo:${MONGO_TAG}"
+  #   container_name: "lemp_mongo_${MONGO_CONTAINER_NAME_VERSION}"
+  #   restart: always
+  #   ports:
+  #     - "${MONGODB_PORT}:27017"
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+  #     MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+  #     # MONGO_INITDB_DATABASE: ${MONGO_DB}
+  #   volumes:
+  #     - /etc/localtime:/etc/localtime:ro
+  #     - ./mongodb/data:/data/db
+  #     - ./mongodb/initdb:/docker-entrypoint-initdb.d
