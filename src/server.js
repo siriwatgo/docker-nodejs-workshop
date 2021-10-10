@@ -36,6 +36,9 @@ app.use(function (req, res, next) {
     // to the API (e.g. in case you use sessions)
     res.setHeader('Access-Control-Allow-Credentials', true)
 
+    // Remove Unwanted HTTP Response Header
+    res.removeHeader("X-Powered-By")
+
     // Pass to next layer of middleware
     next()
 });

@@ -44,6 +44,7 @@ RUN CONFARGS=$(nginx -V 2>&1 | sed -n -e 's/^.*arguments: //p') \
 # Production container starts here
 FROM nginx:${VERSION}
 
+# Import Headers-More module for NGINX core Headers module.
 COPY --from=builder /usr/src/nginx/nginx-${NGINX_VERSION}/objs/*_module.so /etc/nginx/modules/
 
 # Copy updated server conf files
@@ -54,7 +55,7 @@ RUN ls -al
 # Install Node.JS and NPM
 RUN apk add --update nodejs npm
 
-# copy package API app and cache API app dependencies
+# Copy package API app and cache API app dependencies
 WORKDIR /
 COPY ./package*.json ./
 RUN npm install && mkdir /api && mv ./node_modules /api
