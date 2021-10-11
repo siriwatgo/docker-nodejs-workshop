@@ -1,7 +1,7 @@
 ARG VERSION=alpine
 FROM nginx:${VERSION} as builder
 
-ENV NCHAN_VERSION 1.1.15
+ENV NGINX_VERSION 1.1.15
 ENV MORE_HEADERS_VERSION=0.33
 ENV MORE_HEADERS_GITREPO=openresty/headers-more-nginx-module
 
