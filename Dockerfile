@@ -1,9 +1,11 @@
 ARG VERSION=alpine
 FROM nginx:${VERSION} as builder
 
-ENV NGINX_VERSION 1.1.15
+ENV NGINX_VERSION 1.21.3
 ENV MORE_HEADERS_VERSION=0.33
 ENV MORE_HEADERS_GITREPO=openresty/headers-more-nginx-module
+
+RUN apk --no-cache add wget
 
 # Download sources
 RUN wget "http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz" -O nginx.tar.gz && \
